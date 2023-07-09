@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
+	<select id="selectReal_estate" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+		SELECT 
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAT`
+			, `updatedAT`
+		FROM
+			`real_estate`
+		WHERE
+			`id` = #{id}
+	</select>
+</mapper>
+
+
+
