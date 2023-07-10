@@ -29,7 +29,19 @@ public class Real_estateController {
 	
 	@RequestMapping("/2")
 	@ResponseBody
-	public Real_estate real_estateRentPrice(@RequestParam("rentPrice") int rentPrice);
+	public Real_estate real_estateRentPrice(@RequestParam("rentPrice") int rentPrice) {
 		Real_estate real_estateRentPrice = real_estateServiceRentPrice.getReal_estate(rentPrice);
 		return real_estateRentPrice;
+	}
+	
+	
+	@Autowired
+	private Real_estateService real_estateServiceAreaPrice;
+	
+	@RequestMapping("/3")
+	@ResponseBody
+	public Real_estate real_estateAreaPrice(@RequestParam("area") int area, @RequestParam("price") int price) {
+		Real_estate real_estateAreaPrice = real_estateServiceRentPrice.getReal_estate(area, price);
+		return real_estateAreaPrice;
+	}
 }

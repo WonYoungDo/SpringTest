@@ -24,4 +24,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </mapper>
 
 
+<mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
+	<select id="selectReal_estateRentPrice" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+		SELECT 
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAT`
+			, `updatedAT`
+		FROM
+			`real_estate`
+		WHERE
+			`rentPrice` = #{rentPrice}
+	</select>
+</mapper>
+
+
+<mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
+	<select id="selectReal_estateRentPrice" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+		SELECT 
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAT`
+			, `updatedAT`
+		FROM
+			`real_estate`
+		WHERE
+			`area` = #{area}
+		AND
+			`price` = #{price}
+	</select>
+</mapper>
+
 

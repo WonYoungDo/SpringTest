@@ -22,7 +22,19 @@ public class Real_estateService {
 	private Real_estateRepository real_estateRepositoryRentPrice;
 	
 	public Real_estate getReal_estateRentPrice(int rentPrice) {
-		Real_eatateRentPrice real_estateRentPrice = real_estateRepositoryRentPrice.selectReal_estateRentPrice(rentPrice);
+		Real_estate real_estateRentPrice = real_estateRepositoryRentPrice.selectReal_estateRentPrice(rentPrice);
 		return real_estateRentPrice;
 	}
+	
+	
+	@Autowired
+	private Real_estateRepository real_estateRepositoryAreaPrice;
+	
+	public Real_estate getReal_estaetAreaPrice(int area, int price) {
+		Real_estate real_estateAreaPrice = real_estateRepositoryAreaPrice.selectReal_estateAreaPrice(area, price);
+		retutn real_estateAreaPrice;
+	}
+	
+	
+	
 }

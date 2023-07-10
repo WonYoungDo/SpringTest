@@ -11,6 +11,9 @@ public interface Real_estateRepository {
 	// 1번 id를 조건으로 얻어오기
 	public Real_estate selectReal_estate(@Param("id") int id);
 	
+	// rentPrice를 조건으로 얻어오기
+	public Real_estate selectReal_estateRentPrice(@Param("rentPrice") int rentPrice);
 	
-	
+	// area와 price를 조건으로 얻어오기
+	public Real_estate selectReal_estateAreaPrice(@Param("area") int area, @Param("price") int price);
 }
