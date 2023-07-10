@@ -5,7 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
-	<select id="selectReal_estate" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+	
+	<!--  1번 조건 -->
+	<select id="selectReal_estate" parameterType="int" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
 		SELECT 
 			`id`
 			, `realtorId`
@@ -21,11 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			`id` = #{id}
 	</select>
-</mapper>
-
-
-<mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
-	<select id="selectReal_estateRentPrice" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+    			
+	<!--  2번 조건 -->
+	<select id="selectReal_estateRentPrice" parameterType="int" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
 		SELECT 
 			`id`
 			, `realtorId`
@@ -39,13 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			`real_estate`
 		WHERE
-			`rentPrice` = #{rentPrice}
+			 <![CDATA[`rentPrice` < #{rentPrice}]]> 
+			 AND `type` = '월세'
 	</select>
-</mapper>
-
-
-<mapper namespace="com.tawny.spring.test.mybatis.repository.Real_estateRepository">
-	<select id="selectReal_estateRentPrice" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
+	
+	<!--  3번 조건 -->
+	<select id="selectReal_estateAreaPrice" parameterType="map" resultType="com.tawny.spring.test.mybatis.domain.Real_estate">
 		SELECT 
 			`id`
 			, `realtorId`
@@ -59,10 +58,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			`real_estate`
 		WHERE
-			`area` = #{area}
+			<![CDATA[`area` >= #{area}
 		AND
-			`price` = #{price}
+			`price` <= #{price}]]>
 	</select>
 </mapper>
+
+
+
+
+
+
+
+
 
 

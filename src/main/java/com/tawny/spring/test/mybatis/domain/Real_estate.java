@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Real_estate {
 	
-	private int idl;
+	private int id;
 	private int realtorId;
 	private String address;
 	private int area;
@@ -14,11 +14,11 @@ public class Real_estate {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	public int getIdl() {
-		return idl;
+	public int getId() {
+		return id;
 	}
-	public void setIdl(int idl) {
-		this.idl = idl;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getRealtorId() {
 		return realtorId;
