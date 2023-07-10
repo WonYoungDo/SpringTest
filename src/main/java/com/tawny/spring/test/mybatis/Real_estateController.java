@@ -46,6 +46,20 @@ public class Real_estateController {
 		List<Real_estate> real_estateAreaPrice = real_estateService.getReal_estaetAreaPrice(area, price);
 		return real_estateAreaPrice;
 	}
+	
+	
+	
+	
+	// insert 다루기
+	
+	@RequestMapping("/test02/1")
+	@ResponseBody
+	public String creatReal_estate() {
+		int count = real_estateService.addReal_estate(3, "푸르지용 리버 303동 1104호", 89, "매매", 100000);
+		return "입력 성공" + count;
+	}
+	
+	
 }
 
 

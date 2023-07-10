@@ -62,6 +62,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND
 			`price` <= #{price}]]>
 	</select>
+	
+	<insert id="insertReal_estate" parameterType="map">
+		INSERT INTO
+			`real_estate`
+			(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			)
+		VALUE
+			(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			)
+	</insert>
 </mapper>
 
 

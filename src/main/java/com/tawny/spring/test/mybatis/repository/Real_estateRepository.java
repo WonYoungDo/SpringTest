@@ -24,6 +24,22 @@ public interface Real_estateRepository {
 	public List<Real_estate> selectReal_estateAreaPrice(
 			@Param("area") int area
 			, @Param("price") int price);
-
+	
+	
+	
+	// insert 다루기 
+	
+	
+	public int insertReal_estate(
+			@Param("realtorId") int realtorId
+			, @Param("address") String address
+			, @Param("area") int area
+			, @Param("type") String type
+			, @Param("price") int price);
+		
+	
+	
+	
+	
 	
 }

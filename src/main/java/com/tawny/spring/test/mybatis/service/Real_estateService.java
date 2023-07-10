@@ -2,6 +2,7 @@ package com.tawny.spring.test.mybatis.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,19 @@ public class Real_estateService {
 		return real_estateAreaPrice;			
 	}
 
-
+	
+	
+	
+	// insert 다루기
+	public int addReal_estate(
+			@Param("realtorId") int realtorId
+			, @Param("address") String address
+			, @Param("area") int area
+			, @Param("type") String type
+			, @Param("price") int price) {
+		int count = real_estateRepository.insertReal_estate(realtorId, address, area, type, price);
+		return count;
+	}
 	
 	
 	
