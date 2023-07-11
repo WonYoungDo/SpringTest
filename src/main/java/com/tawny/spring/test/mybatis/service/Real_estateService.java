@@ -53,8 +53,8 @@ public class Real_estateService {
 	}
 	
 	
-	public int addRealEstate(Real_estate real_estate) {
-		int count = real_estateRepository.insertRealEstate(real_estate);
+	public int addRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId) {
+		int count = real_estateRepository.insertRealEstate(real_estate, realtorId);
 		return count;
 	}
 	

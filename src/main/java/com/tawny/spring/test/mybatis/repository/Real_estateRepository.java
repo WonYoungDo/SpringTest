@@ -39,7 +39,7 @@ public interface Real_estateRepository {
 		
 	
 	
-	public int insertRealEstate(Real_estate real_estate);
+	public int insertRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId);
 	
 	
 }

@@ -62,16 +62,16 @@ public class Real_estateController {
 	
 	
 	@ResponseBody
-	@RequestMapping("test02/2")
-	public String creatRealEstate() {
+	@RequestMapping("/test02/2")
+	public String creatRealEstate(@RequestParam("realtorId") int realtorId) {
 		Real_estate real_estate = new Real_estate();
-		real_estate.setAddress("address");
+		real_estate.setAddress("썅떼빌리버 오피스텔 814호");
 		real_estate.setArea(45);
 		real_estate.setType("월세");
 		real_estate.setPrice(100000);
 		real_estate.setRentPrice(120);
 		
-		int count = real_estateService.addRealEstate(real_estate);
+		int count = real_estateService.addRealEstate(real_estate, realtorId);
 		return "입력 성공 " + count;
 	}
 	
