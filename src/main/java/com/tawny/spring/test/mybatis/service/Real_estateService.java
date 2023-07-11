@@ -42,20 +42,40 @@ public class Real_estateService {
 	
 	
 	// insert 다루기
-	public int addReal_estate(
+//	public int addReal_estate(
+//			@Param("realtorId") int realtorId
+//			, @Param("address") String address
+//			, @Param("area") int area
+//			, @Param("type") String type
+//			, @Param("price") int price) {
+//		int count = real_estateRepository.insertReal_estate(realtorId, address, area, type, price);
+//		return count;
+//	}
+	
+	
+	public int addRealEstate(
 			@Param("realtorId") int realtorId
 			, @Param("address") String address
 			, @Param("area") int area
 			, @Param("type") String type
-			, @Param("price") int price) {
-		int count = real_estateRepository.insertReal_estate(realtorId, address, area, type, price);
+			, @Param("price") int price
+			, @Param("rentPrice") int rentPrice) {
+		int count = real_estateRepository.insertRealEstate(realtorId, address, area, type, price, rentPrice);
+		return count;
+	}
+
+
+	
+//	public int addRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId) {
+//		int count = real_estateRepository.insertRealEstate(real_estate, realtorId);
+//		return count;
+//	}
+	
+	
+	public int updateRealEstate(int id, String type, int price) {
+		int count = real_estateRepository.updateRealEstate(id, type, price);
 		return count;
 	}
 	
-	
-	public int addRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId) {
-		int count = real_estateRepository.insertRealEstate(real_estate, realtorId);
-		return count;
-	}
 	
 }

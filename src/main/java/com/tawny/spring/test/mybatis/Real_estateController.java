@@ -52,28 +52,46 @@ public class Real_estateController {
 	
 	// insert 다루기
 	
-	@RequestMapping("/test02/1")
+//	@RequestMapping("/test02/1")
+//	@ResponseBody
+//	public String creatReal_estate() {
+//		int count = real_estateService.addReal_estate(3, "푸르지용 리버 303동 1104호", 89, "매매", 100000);
+//		return "입력 성공" + count;
+//	}
+	
+	
+	@RequestMapping("/test02/2")
 	@ResponseBody
-	public String creatReal_estate() {
-		int count = real_estateService.addReal_estate(3, "푸르지용 리버 303동 1104호", 89, "매매", 100000);
+	public String creatRealEstate(@RequestParam("realtorId") int realtorId) {
+		int count = real_estateService.addRealEstate(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120);
 		return "입력 성공" + count;
 	}
 	
 	
 	
+//	@ResponseBody
+//	@RequestMapping("/test02/2")
+//	public String creatRealEstate(@RequestParam("realtorId") int realtorId) {
+//		Real_estate real_estate = new Real_estate();
+//		real_estate.setAddress("썅떼빌리버 오피스텔 814호");
+//		real_estate.setArea(45);
+//		real_estate.setType("월세");
+//		real_estate.setPrice(100000);
+//		real_estate.setRentPrice(120);
+//		
+//		int count = real_estateService.addRealEstate(real_estate, realtorId);
+//		return "입력 성공 " + count;
+//	}
+	
 	@ResponseBody
-	@RequestMapping("/test02/2")
-	public String creatRealEstate(@RequestParam("realtorId") int realtorId) {
-		Real_estate real_estate = new Real_estate();
-		real_estate.setAddress("썅떼빌리버 오피스텔 814호");
-		real_estate.setArea(45);
-		real_estate.setType("월세");
-		real_estate.setPrice(100000);
-		real_estate.setRentPrice(120);
-		
-		int count = real_estateService.addRealEstate(real_estate, realtorId);
-		return "입력 성공 " + count;
+	@RequestMapping("/test02/3")
+	public String updateRealEstate() {
+		int count = real_estateService.updateRealEstate(22, "전세", 70000);
+		return "수정 성공 : " + count;
 	}
+	
+	
+	
 	
 }
 

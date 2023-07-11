@@ -30,16 +30,30 @@ public interface Real_estateRepository {
 	// insert 다루기 
 	
 	
-	public int insertReal_estate(
+//	public int insertReal_estate(
+//			@Param("realtorId") int realtorId
+//			, @Param("address") String address
+//			, @Param("area") int area
+//			, @Param("type") String type
+//			, @Param("price") int price);
+		
+	public int insertRealEstate(
 			@Param("realtorId") int realtorId
 			, @Param("address") String address
 			, @Param("area") int area
 			, @Param("type") String type
+			, @Param("price") int price
+			, @Param("rentPrice") int rentPrice);
+	
+	
+	
+//	public int insertRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId);
+	
+	
+	
+	public int updateRealEstate(
+			@Param("id") int id
+			, @Param("type") String type
 			, @Param("price") int price);
-		
-	
-	
-	public int insertRealEstate(Real_estate real_estate, @Param("realtorId") int realtorId);
-	
 	
 }
