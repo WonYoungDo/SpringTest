@@ -60,6 +60,21 @@ public class Real_estateController {
 	}
 	
 	
+	
+	@ResponseBody
+	@RequestMapping("test02/2")
+	public String creatRealEstate() {
+		Real_estate real_estate = new Real_estate();
+		real_estate.setAddress("address");
+		real_estate.setArea(45);
+		real_estate.setType("월세");
+		real_estate.setPrice(100000);
+		real_estate.setRentPrice(120);
+		
+		int count = real_estateService.addRealEstate(real_estate);
+		return "입력 성공 " + count;
+	}
+	
 }
 
 
