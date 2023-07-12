@@ -9,8 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO
 			`seller`
 		(
-			`id`
-			, `nickname`
+			`nickname`
 			, `profileImage`
 			, `temperature`
 		)
@@ -21,4 +20,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, #{temperature}
 		)
 	</insert>
+	
+	<select id="selectSeller" resultType="com.tawny.spring.test.jsp.domain.Seller">
+		SELECT
+			`id`
+			, `nickname`
+			, `profileImage`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		ORDER BY
+			`id` DESC
+		Limit
+			1
+	</select>
+	
+	<select id="selectSellerInfo" parameterType="int" resultType="com.tawny.spring.test.jsp.domain.Seller">
+		SELECT
+			`id`
+			, `nickname`
+			, `profileImage`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		WHERE
+			`id` = #{id}
+	</select>
+
 </mapper>
