@@ -13,11 +13,10 @@ public class SellerService {
 	private SellerRepository selleRepository;
 	
 	public int addSeller(
-			@Param("id") int id
-			, @Param("nicename") String nickname
+			@Param("nicename") String nickname
 			, @Param("profileImage") String profileImage
 			, @Param("temperature") double temperature) {
-		int count = selleRepository.insertSeller(id, nickname, profileImage, temperature);
+		int count = selleRepository.insertSeller(nickname, profileImage, temperature);
 		return count;
 	}
 }

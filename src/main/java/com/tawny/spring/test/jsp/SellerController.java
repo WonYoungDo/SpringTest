@@ -20,11 +20,10 @@ public class SellerController {
 	@ResponseBody
 	@PostMapping("/1")
 	public String creatSeller(
-			@RequestParam("id") int id
-			, @RequestParam("nickname") String nickname
+			@RequestParam("nickname") String nickname
 			, @RequestParam("profileImage") String profileImage
 			, @RequestParam("temperature") double temperature)	{
-		int count = sellerService.addSeller(id, nickname, profileImage, temperature);
+		int count = sellerService.addSeller(nickname, profileImage, temperature);
 		return "입력성공 : " + count;
 	}
 	
