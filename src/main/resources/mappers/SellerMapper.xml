@@ -3,3 +3,23 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tawny.spring.test.jsp.repository.SellerRepository">
+	<insert id="insertSeller" parameterType="map">
+		INSERT INTO
+			`seller`
+		(
+			`id`
+			, `nickname`
+			, `profileImage`
+			, `temperature`
+		)
+		VALUE
+		(
+			#{id}
+			, #{nickname}
+			, #{profileImage}
+			, #{temperature}
+		)
+	</insert>
+</mapper>
