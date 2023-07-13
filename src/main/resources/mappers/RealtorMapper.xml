@@ -5,7 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tawny.spring.test.jsp.repository.RealtorRepository">
-	<insert id="insertRealtor" parameterType="com.tawny.spring.test.jsp.domain.Realtor">
+	<insert id="insertRealtor" parameterType="com.tawny.spring.test.jsp.domain.Realtor"
+	useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 			`realtor`
 		(
@@ -16,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		VALUE
 		(
-			, #{office}
+			#{office}
 			, #{phoneNumber}
 			, #{address}
 			, #{grade}

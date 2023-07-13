@@ -19,23 +19,24 @@ public class RealtorController {
 	@Autowired
 	private RealtorService realtorService;
 	
-	@ResponseBody
-	@PostMapping("/realtor")
+	
+	@GetMapping("/realtor")
 	public String creatRealtor(
 			@RequestParam("office") String office
 			, @RequestParam("phoneNumber") String phoneNumber
 			, @RequestParam("address") String address
 			, @RequestParam("grade") String grade
-			,Model model) {
-
+			, Model model) {
+		
 		Realtor realtor = new Realtor();
 		realtor.setOffice(office);
 		realtor.setPhoneNumber(phoneNumber);
 		realtor.setAddress(address);
 		realtor.setGrade(grade);
 		
-//		int count = realtorService.addRealtor(office, phoneNumber, address, grade);
+		int count = realtorService.addRealtor(realtor);
 		
+		// 앞에 문자열로 저장된 "realtor"로 realtor객체를 다룬다
 		model.addAttribute("realtor", realtor);
 		
 		return "jsp/realtorInfo";
