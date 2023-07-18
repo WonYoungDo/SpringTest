@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class Weather {
 	
-	private int date;
+	private int id;
+	private Date date;
 	private String weather;
 	private double temperatures;
 	private double precipitation;
@@ -14,10 +15,16 @@ public class Weather {
 	private Date updatedAT;
 	
 	
-	public int getDate() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(int date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getWeather() {
@@ -63,5 +70,7 @@ public class Weather {
 		this.updatedAT = updatedAT;
 	}
 	
+	
+
 	
 }

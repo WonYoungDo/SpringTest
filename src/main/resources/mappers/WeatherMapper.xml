@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tawny.spring.test.jstl.jstl.repository.WeatherRepository">
 	<select id="selectWeather" parameterType="map" resultType="com.tawny.spring.test.jstl.jstl.domain.Weather">
 		SELECT
-			`date`
+			`id`
+			, `date`
 			, `weather`
 			, `temperatures`
 			, `precipitation`
@@ -15,5 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, `windSpeed`
 			, `createdAT`
 			, `updatedAT`
+		FROM
+			`weatherhistory`
 	</select>
 </mapper>
