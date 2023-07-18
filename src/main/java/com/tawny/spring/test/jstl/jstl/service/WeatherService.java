@@ -1,9 +1,11 @@
 package com.tawny.spring.test.jstl.jstl.service;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
-@Controller
+@Service
 public class WeatherService {
+	
 
+	
 	
 }
