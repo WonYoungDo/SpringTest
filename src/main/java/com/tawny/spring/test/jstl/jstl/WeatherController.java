@@ -18,6 +18,7 @@ public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
 	
+	
 	@GetMapping("/info")
 	public String weather(Model model) {
 		
@@ -33,4 +34,7 @@ public class WeatherController {
 	public String weatherInput() {
 		return "jstl/weather/weatherInput";
 	}
+	
+	
+	
 }
