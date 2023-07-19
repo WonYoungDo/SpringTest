@@ -32,9 +32,25 @@
 						<tbody>
 							<c:forEach var="weather" items="${weatherList }">
 								<tr>
-									<td>${weather.date }</td>
+									<td><fmt:formatDate value="${weather.date }" pattern="yyyy년 M월 dd일" /> </td>
 									
-									<td>${weather.weather }</td>
+									<td>
+										<c:choose>
+											<c:when test="${weather.weather eq '맑음'}">
+												<img alt="${weather.weather }" src="/jstl/image/맑음.jpg">											
+											</c:when>
+											<c:when test="${weather.weather eq '비'}">
+												<img alt="${weather.weather }" src="/jstl/image/비.jpg">											
+											</c:when>
+											<c:when test="${weather.weather eq '흐림'}">
+												<img alt="${weather.weather }" src="/jstl/image/흐림.jpg">											
+											</c:when>
+											<c:when test="${weather.weather eq '구름조금'}">
+												<img alt="${weather.weather }" src="/jstl/image/구름조금.jpg">											
+											</c:when>
+											<c:otherwise>${weather.weather }</c:otherwise>
+										</c:choose>
+									</td>
 									
 									<td>${weather.temperatures }℃</td>
 									<td>${weather.precipitation }mm</td>

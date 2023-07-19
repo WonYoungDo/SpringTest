@@ -2,10 +2,15 @@ package com.tawny.spring.test.jstl.jstl.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Weather {
 	
 	private int id;
+	
+	@DateTimeFormat(pattern = "yyyy년 M월 dd일")
 	private Date date;
+	
 	private String weather;
 	private double temperatures;
 	private double precipitation;
