@@ -20,11 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			`weatherhistory`
 	</select>
 	
+	<!-- 여러 객체를 전달 받으므로 map -->
 	<insert id="insertWeather" parameterType="map">
-		INSERT
+		INSERT INTO
 			`weatherhistory`
 		(
-			`yyyyMMdd`
+			`date`
 			, `weather`
 			, `microDust`
 			, `temperatures`
@@ -33,7 +34,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		VALUE
 		(
-			#{yyyyMMdd}
+			#{date}
+			, #{weather}
+			, #{microDust}
+			, #{temperatures}
+			, #{precipitation}
+			, #{windSpeed}
+		)	
+	</insert>
+	<!-- 직접 만들었으므로 domain주소 -->
+	<insert id="insertWeatherByObject" parameterType="com.tawny.spring.test.jstl.jstl.domain.Weather">
+		INSERT INTO
+			`weatherhistory`
+		(
+			`date`
+			, `weather`
+			, `microDust`
+			, `temperatures`
+			, `precipitation`
+			, `windSpeed`
+		)
+		VALUE
+		(
+			#{date}
 			, #{weather}
 			, #{microDust}
 			, #{temperatures}

@@ -20,4 +20,7 @@ public interface WeatherRepository {
 			, @Param("temperatures") double temperatures
 			, @Param("precipitation") double precipitation
 			, @Param("windSpeed") double windSpeed);
+
+
+	public int insertWeatherByObject(Weather weather);
 }
