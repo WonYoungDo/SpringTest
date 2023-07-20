@@ -38,6 +38,7 @@ public class AjaxController {
 		return "ajax/favorite";
 	}
 	
+	
 	//
 	@PostMapping("/add")
 	public Map<String, String> createFavorite(
