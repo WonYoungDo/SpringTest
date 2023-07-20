@@ -30,9 +30,9 @@
 					<tr>
 						<td>${status.count }</td>
 						<td>${member.name }</td>
-						<%-- 
+						
 						<c:choose>
-							<c:when test="${startsWith(member.phoneNumber, '010') }">
+							<c:when test="${fn:startsWith(member.phoneNumber, '010') }">
 								<td>${member.phoneNumber }</td>
 							</c:when>
 							<c:otherwise>
@@ -40,13 +40,20 @@
 							</c:otherwise>
 						
 						</c:choose>
-						--%>
+						
 						
 						<td>${fn:replace(member.nationality, "삼국시대", "삼국 - ") }</td>
 						
 						<td><b>${fn:split(member.email, "@")[0] }</b>@${fn:split(member.email, "@")[1] }</td>
 						
-						<td>${member.introduce }</td>
+						<td>
+							<!--  <c:choose>
+								<c:when test="${fn:length(memeber.introduce, 0, 15)}">
+									${member.introduce }
+								</c:when>
+							</c:choose>
+							 -->
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
