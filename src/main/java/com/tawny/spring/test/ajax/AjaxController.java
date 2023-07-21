@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tawny.spring.test.ajax.domain.Favorite;
 import com.tawny.spring.test.ajax.service.FavoriteService;
@@ -25,14 +26,14 @@ public class AjaxController {
 	
 	// input 페이지 보여주는 메소드
 	@GetMapping("/input")
-	public String forvoriteInput() {
+	public String farvoriteInput() {
 		return "ajax/farvoriteInput";
 	}
 	
 	
 	// select 쿼리 얻기
 	@GetMapping("/list")
-	public String forvoriteInfo(Model model) {
+	public String farvoriteInfo(Model model) {
 		List<Favorite> favoriteList = favoriteService.getFavorite();
 		model.addAttribute("favorite", favoriteList);
 		return "ajax/favorite";
@@ -41,6 +42,7 @@ public class AjaxController {
 	
 	//
 	@PostMapping("/add")
+	@ResponseBody
 	public Map<String, String> createFavorite(
 			@RequestParam("name") String name
 			, @RequestParam("address") String address) {
@@ -61,7 +63,22 @@ public class AjaxController {
 		return resultMap;
 	}
 	
-
+	
+	@GetMapping("/confirm")
+	@ResponseBody
+	public Map<String, Boolean> emailConfirm(@RequestParam("address") String address) {
+				
+		Map<String, Boolean> duplicateResult = new HashMap<>();
+		
+		if(favoriteService.duplicationEmail(address)) {
+			duplicateResult.put("duplicate", true); // 중복이 된다면
+		} else {
+			duplicateResult.put("duplicate", false); // 중복이 안 된다면
+		}
+	
+		return duplicateResult;
+	}
+	
 	
 	
 	

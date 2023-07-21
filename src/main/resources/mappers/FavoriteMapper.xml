@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			`favorite`
 	</select>
+	
 	<insert id="insertFavorite" parameterType="map">
 		INSERT INTO
 			`favorite`
@@ -26,4 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, #{address}
 		)
 	</insert>
+	
+	<select id="selectEmail" resultType="int" parameterType="String">
+		SELECT 
+			count(1)
+		FROM
+			`favorite`
+		WHERE
+			`address` = #{address}
+	</select>
 </mapper>

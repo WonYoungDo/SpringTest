@@ -25,4 +25,17 @@ public class FavoriteService {
 		int count = favoriteRepository.insertFavorite(name, address);
 		return count;
 	}
+	
+	
+	// 이메일 주소 중복확인
+	public boolean duplicationEmail(String address) {
+		int count = favoriteRepository.selectEmail(address);
+		
+		if(count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
 }

@@ -11,11 +11,22 @@
 <body>
 	<div class="container">
 		<h2>즐겨 찾기 추가하기</h2>
+		
 		<label>제목</label> <br>
-		<input type="text" class="form-control" name="name" id="nameInput"> <br>
+		<input type="text" class="form-control d-flex col-12" name="name" id="nameInput"> <br>
+		
 		<label>주소</label> <br>
-		<input type="text" class="form-control" name="address" id="addressInput"> <br>
-		<button type="button" class="btn-success" id="addBtn">추가</button>	
+		<div class="d-flex">
+			<input type="text" class="form-control col-11" name="address" id="addressInput">
+			<button type="button" class="form-control col-1 btn-primary" id="duplicateBtn">중복확인</button> <br>
+		</div>
+		<div class="smail text-danger d-none" id="duplicateUrlText">중복된 url입니다.</div>
+		<div class="smail text-primary d-none" id="ableUrlText">사용가능한 url입니다.</div>
+		
+		<div class="d-flex justify-content-end">
+			<button type="button" class="btn-success form-control mt-2" id="addBtn">추가</button>	
+		</div>
+		
 	</div>	
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -23,6 +34,48 @@
 	
 	<script>
 		$("#document").ready(function() {
+		
+			var checkedDuplicate = false;
+			
+			
+			
+			// 주소를 입력했을 때 
+			// 중복이 된다면 밑에 안내글 보여지게 하기
+			$("#duplicateBtn").on("click", function() {
+				
+				let email = $("#addressInput").val();
+				
+				if(email == "") {
+					alert("이메일을 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/test/confirm"
+					, data:{"address":email}
+					, success:function(data) {
+						
+						checkedDuplicate = true;
+												
+						// 중복됨 : {"duplicateResult":true}
+						// 중복되지 않음 : {"duplicateResult":false}
+						if(data.duplicateResult) { // 중복됨 값 자체가 true를 return해줌
+							$("#duplicateUrlText").removeClass("d-none");
+							$("#ableUrlText").addClass("d-none");
+						} else { // 중복되지 않음
+							$("#ableUrlText").removeClass("d-none");							
+							$("#duplicateUrlText").addClass("d-none");
+						}
+						
+					}
+					, error:function() {
+						alert("중복 확인 에러")
+					}
+				});
+			});
+			
+			
 			
 			$("#addBtn").on("click", function() {
 				let name = $("#nameInput").val();
@@ -36,15 +89,12 @@
 					alert("url주소를 입력하세요");
 					return;
 				}
-				
 				// http:// 시작하지 않고, https:// 시작하지 않으면 
-				if(!url.startsWith("http://") && !url.startsWith("https://")) {
+				if(!address.startsWith("http://") && !address.startsWith("https://")) {
 					alert("주소를 확인하세요");
 					return;
 				}
-				
-				
-				
+					
 				$.ajax({
 					type:"post"
 					, utl:"/ajax/test/add"
