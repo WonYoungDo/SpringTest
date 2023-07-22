@@ -35,8 +35,8 @@ public class AjaxController {
 	@GetMapping("/list")
 	public String farvoriteInfo(Model model) {
 		List<Favorite> favoriteList = favoriteService.getFavorite();
-		model.addAttribute("favorite", favoriteList);
-		return "ajax/favorite";
+		model.addAttribute("favoriteList", favoriteList);
+		return "ajax/farvorite";
 	}
 	
 	
@@ -64,7 +64,7 @@ public class AjaxController {
 	}
 	
 	
-	@GetMapping("/confirm")
+	@PostMapping("/confirm")
 	@ResponseBody
 	public Map<String, Boolean> emailConfirm(@RequestParam("address") String address) {
 				

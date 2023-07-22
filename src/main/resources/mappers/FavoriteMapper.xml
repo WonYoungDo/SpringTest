@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			`favorite`
 		(
 			`name`
-			`address`
+			, `address`
 		)
 		VALUE
 		(
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<select id="selectEmail" resultType="int" parameterType="String">
+	<select id="selectEmail" resultType="int" parameterType="string">
 		SELECT 
 			count(1)
 		FROM

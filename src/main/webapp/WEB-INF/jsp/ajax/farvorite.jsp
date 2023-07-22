@@ -17,16 +17,18 @@
 				<th>NO.</th>
 				<th>이름</th>
 				<th>주소</th>
+				<th></th>
 			</tr>		
 		</thead>
 		<tbody>
-			<tr>
 			<c:forEach var="favorite" items="${favoriteList }">
+			<tr>
 				<td>${favorite.id }</td>
 				<td>${favorite.name }</td>
 				<td>${favorite.address }</td>
-			</c:forEach>
+				<td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
 			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -21,7 +21,7 @@
 			<button type="button" class="form-control col-1 btn-primary" id="duplicateBtn">중복확인</button> <br>
 		</div>
 		<div class="smail text-danger d-none" id="duplicateUrlText">중복된 url입니다.</div>
-		<div class="smail text-primary d-none" id="ableUrlText">사용가능한 url입니다.</div>
+		<div class="smail text-primary d-none" id="availableUrlText">사용가능한 url입니다.</div>
 		
 		<div class="d-flex justify-content-end">
 			<button type="button" class="btn-success form-control mt-2" id="addBtn">추가</button>	
@@ -35,7 +35,24 @@
 	<script>
 		$("#document").ready(function() {
 		
-			var checkedDuplicate = false;
+			var checkedDuplicate = false; // 중복 체크 여부
+			var isDuplicateUrl = true; // 주소 중복 여부 
+			
+			
+			
+			
+			// url이 중복되었고 
+			$("#addressInput").on("input", function() {
+				
+				// 중복확인 관련 데이터 초기화
+				checkedDuplicate = false;
+				isDuplicateUrl = true;
+			
+				$("#availableUrlText").addClass("d-none");
+				$("#duplicateUrlText").addClass("d-none");
+			});
+			
+			
 			
 			
 			
@@ -43,17 +60,17 @@
 			// 중복이 된다면 밑에 안내글 보여지게 하기
 			$("#duplicateBtn").on("click", function() {
 				
-				let email = $("#addressInput").val();
+				let address = $("#addressInput").val();
 				
-				if(email == "") {
+				if(address == "") {
 					alert("이메일을 입력하세요.");
 					return;
 				}
 				
 				$.ajax({
-					type:"get"
+					type:"post"
 					, url:"/ajax/test/confirm"
-					, data:{"address":email}
+					, data:{"address":address}
 					, success:function(data) {
 						
 						checkedDuplicate = true;
@@ -62,10 +79,12 @@
 						// 중복되지 않음 : {"duplicateResult":false}
 						if(data.duplicateResult) { // 중복됨 값 자체가 true를 return해줌
 							$("#duplicateUrlText").removeClass("d-none");
-							$("#ableUrlText").addClass("d-none");
+							$("#availableUrlText").addClass("d-none");
+							isDuplicateUrl = true;
 						} else { // 중복되지 않음
-							$("#ableUrlText").removeClass("d-none");							
+							$("#availableUrlText").removeClass("d-none");							
 							$("#duplicateUrlText").addClass("d-none");
+							isDuplicateUrl = false;
 						}
 						
 					}
@@ -75,9 +94,11 @@
 				});
 			});
 			
+
 			
-			
+			// 추가 버튼을 눌렀을 때 입력확인 유효성 검사
 			$("#addBtn").on("click", function() {
+				
 				let name = $("#nameInput").val();
 				let address = $("#addressInput").val();
 				
@@ -89,17 +110,30 @@
 					alert("url주소를 입력하세요");
 					return;
 				}
+				
 				// http:// 시작하지 않고, https:// 시작하지 않으면 
 				if(!address.startsWith("http://") && !address.startsWith("https://")) {
 					alert("주소를 확인하세요");
 					return;
 				}
+
+				// 중복 체크를 하지 않은 경우
+				if(checkedDuplicate == false) {
+					alert("url 중복 확인하세요");
+					return;
+				}
+				
+				// url주소가 중복된 경우
+				if(isDuplicateUrl) {
+					alert("url이 중복되었습니다.");
+					return;
+				}
 					
 				$.ajax({
 					type:"post"
-					, utl:"/ajax/test/add"
+					, url:"/ajax/test/add"
 					, data:{"name":name, "address":address} // request
-					,success:function(data) {               // response
+					, success:function(data) {               // response
 						if(data.result == "success") {
 							
 							// 리스트 페이지 이동
