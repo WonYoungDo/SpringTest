@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>즐겨 찾기 목록</h2>
-	<table class="table text-center">
+	<table id="myTable" class="table text-center">
 		<thead>
 			<tr>
 				<th>NO.</th>
@@ -26,13 +26,39 @@
 				<td>${favorite.id }</td>
 				<td>${favorite.name }</td>
 				<td>${favorite.address }</td>
-				<td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
+				<td><button type="button" class="btn btn-danger btn-sm delete-btn">삭제</button></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<script>
+		$(document).ready(function() {
+			$(".delete-btn").on("click", function() {				
+					
+				$(this).closest("tr").remove();		
+ 				
+//				var favoriteId = $(this).data("id");
+//				$.ajax({
+//		            type: "DELETE"
+//		            , url: "/ajax/test/list" + favoriteId
+//		            , success: function(response) {
+//		                // 4. 서버의 응답이 성공적인 경우 해당 행을 삭제합니다.
+//		                $("#myTable").find(`[data-id="${favoriteId}"]`).closest("tr").remove();
+//		            	alert("tt");
+//		            }
+//		            , error: function(jqXHR, textStatus, errorThrown) {
+//		                // 서버의 응답이 실패한 경우, 에러 메시지를 표시합니다.
+//		                alert("삭제 실패");
+//		            }
+//		        });
+			});
+		});	
+	</script>
+	
+	
 </body>
 </html>
