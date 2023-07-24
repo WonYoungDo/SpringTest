@@ -81,5 +81,26 @@ public class AjaxController {
 	
 	
 	
+	// 삭제 API 만들기
+	@GetMapping("/delete")
+	@ResponseBody
+	public Map<String, String> deleteFavorite(@RequestParam("id") int id) {
+		int count = favoriteService.deleteFavorite(id);
+		
+		// 성공 : {"result":"success"}
+		// 실패 : {"result":"fail"}
+		Map<String, String> deleteResult = new HashMap<>();
+		
+		
+		if(count == 1) {
+			// 성공
+			deleteResult.put("result", "success");
+		} else {
+			// 실패
+			deleteResult.put("result", "fail");
+		}
+		return deleteResult;
+	}
+	
 	
 }

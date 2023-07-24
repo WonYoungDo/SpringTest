@@ -18,5 +18,6 @@ public interface FavoriteRepository {
 			, @Param("address") String address);
 
 	public int selectEmail(@Param("address") String address);
-
+	
+	public int deleteFavorite(@Param("id") int id);
 }

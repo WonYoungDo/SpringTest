@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>즐겨 찾기 목록</h2>
-	<table id="myTable" class="table text-center">
+	<table id="favoriteTable" class="table text-center">
 		<thead>
 			<tr>
 				<th>NO.</th>
@@ -26,7 +26,7 @@
 				<td>${favorite.id }</td>
 				<td>${favorite.name }</td>
 				<td>${favorite.address }</td>
-				<td><button type="button" class="btn btn-danger btn-sm delete-btn">삭제</button></td>
+				<td><button type="button" class="btn btn-danger btn-sm delete-btn" data-favorite-id="${favorite.id }">삭제</button></td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -38,23 +38,35 @@
 	<script>
 		$(document).ready(function() {
 			$(".delete-btn").on("click", function() {				
-					
-				$(this).closest("tr").remove();		
- 				
+				
+				let id = $(this).data("favorite-id");
+				
+				
+//				$(this).closest("tr").remove();				
 //				var favoriteId = $(this).data("id");
-//				$.ajax({
-//		            type: "DELETE"
-//		            , url: "/ajax/test/list" + favoriteId
-//		            , success: function(response) {
-//		                // 4. 서버의 응답이 성공적인 경우 해당 행을 삭제합니다.
-//		                $("#myTable").find(`[data-id="${favoriteId}"]`).closest("tr").remove();
-//		            	alert("tt");
-//		            }
-//		            , error: function(jqXHR, textStatus, errorThrown) {
-//		                // 서버의 응답이 실패한 경우, 에러 메시지를 표시합니다.
-//		                alert("삭제 실패");
-//		            }
-//		        });
+
+				$.ajax({ // 요청
+		            type: "get"
+		            , url: "/ajax/test/delete" // + favoriteId
+		            , data:{"id":id}
+				
+		            , success: function(data) { // 전달
+		                // 4. 서버의 응답이 성공적인 경우 해당 행을 삭제합니다.
+		                
+		                // 성공 : {"result":"success"}
+						// 실패 : {"result":"fail"}
+						if(data.result == "success") {
+							location.reload(); // 새로고침해서 새로 데이터 보여줌
+						} else {
+							alert("삭제 실패");
+						}
+
+		            }
+		            , error: function(jqXHR, textStatus, errorThrown) {
+		                // 서버의 응답이 실패한 경우, 에러 메시지를 표시합니다.
+		                alert("삭제 에러");
+		            }
+		        });
 			});
 		});	
 	</script>

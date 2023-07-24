@@ -36,4 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			`address` = #{address}
 	</select>
+	
+	<delete id="deleteFavorite" parameterType="int">
+		DELETE FROM
+			`favorite`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>
