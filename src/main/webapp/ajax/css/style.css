@@ -1,0 +1,37 @@
+@charset "UTF-8";
+#wrap {
+    width: 1200px;
+    margin: auto;
+}
+
+.logo {
+    height: 150px;
+}
+
+.menu {
+    height: 50px;
+    background-color: #cf7610;
+}
+
+.main > .main-picture {
+    height: 400px;
+}
+.main > .reserve {
+    height: 300px;
+}
+
+.main > .reserve > .real-time {
+    background-color: #bd5104;
+}
+
+.main > .reserve >  .confirmation {
+    background-color: #fc8200;
+}
+
+.main > .reserve >  .inquiry {
+    background-color: #bd5104;
+}
+
+footer {
+    height: 100px;
+}
