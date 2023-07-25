@@ -29,9 +29,8 @@ public class PensionService {
 			, int headcount
 			, int day
 			, Date date
-			, String phoneNumber
-			, String state) {
-		int count = pensionRepository.insertBooking(name, headcount, day, date, phoneNumber, state);
+			, String phoneNumber) {
+		int count = pensionRepository.insertBooking(name, headcount, day, date, phoneNumber, "대기중");
 		return count;
 	}
 	
@@ -41,6 +40,13 @@ public class PensionService {
 		int count = pensionRepository.deleteBooking(id);
 		return count;
 	}
-
+	
+	
+	public Pension searchBooking(
+			String name
+			, String phoneNumber) { // 한 행을 저장하기 위함으로 리턴 타입은 엔티티로 한다.
+		Pension pension = pensionRepository.searchBooking(name, phoneNumber);
+		return pension;
+	}
 
 }

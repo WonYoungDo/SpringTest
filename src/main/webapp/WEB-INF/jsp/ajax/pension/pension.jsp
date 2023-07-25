@@ -14,13 +14,13 @@
         <jsp:include page="header.jsp"/>
 		<jsp:include page="nav.jsp"/>
         <section class="main text-white">
-            <div class="main-picture bg-danger">
+            <div class="main-picture">
                 <img id="img" height="400" width="1200"  src="/ajax/image/통나무 팬션.jpg" alt="통나무 팬션">
             </div>
             <div class="reserve d-flex">  
-                    <div class="real-time col-4 d-flex align-items-center justify-content-center">
-                        <a href="#"><h1 class="text-white">실시간<br>예약하기</h1></a>
-                    </div>
+                <div class="real-time col-4 d-flex align-items-center justify-content-center">
+                    <a href="#"><h1 class="text-white">실시간<br>예약하기</h1></a>
+                </div>
                 <div class="confirmation col-5">
                     <div class="d-flex align-items-end pt-3">
                         <h3 class="ml-2">예약확인</h3>
@@ -28,12 +28,12 @@
                     <div>
                         <div id="memberBox">
                             <div class="pt-4 pb-2 d-flex">
-                                <label class="col-3 text-center">아이디</label>
-                                <input type="text" id="idInput" class="col-7 form-control">
+                                <label class="col-3 text-center">이름</label>
+                                <input type="text" id="nameInput" class="col-7 form-control">
                             </div>
                             <div class="d-flex">
-                                <label class="col-3 text-center">비밀번호</label>
-                                <input type="password" id="passwordInput" class="col-7 form-control">
+                                <label class="col-3 text-center">전화번호</label>
+                                <input type="password" id="phoneNumberInput" class="col-7 form-control">
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
 	    $(document).ready(function() {
-	
+			
 	        var image = ["/ajax/image/통나무 팬션.jpg", "/ajax/image/거실.jpg", "/ajax/image/침실.jpg", "/ajax/image/풍경.jpg"];
 	        
 	        var currentIndex = 0;
@@ -79,28 +79,47 @@
 	            }, 3000);
 	
 	
-	        $("#search").on("click", function() {            
+	        $("#search").on("click", function() {
+	        	
 	            // 아이디 비밀번호 유효성 검사를 실행
-	            let = type = $("input[name='reserve']:checked").val();
-	            
-	            if(type == "member") {
-	            	
-	                let idInput = $("#idInput").val();
-	                let passwordInput = $("#passwordInput").val();
+	                let name = $("#nameInput").val();
+	                let phoneNumber = $("#phoneNumberInput").val();
 	                
-	                if(idInput == "") {
-	                    alert("아이디를 입력하세요.");
+	                if(name == "") {
+	                    alert("사용자 이름을 입력하세요.");
 	                    return;
 	                }
-	                if(passwordInput == "") {
-	                    alert("비밀번호를 입력하세요.");
+	                if(phoneNumber == "") {
+	                    alert("전화번호를 입력하세요.");
 	                    return;
 	                }
-	            }  
+	                
+	                $.ajax({
+	                	type:"get"
+	                	, url:"/ajax/pension/search"
+	                	, data:{"name":name, "phoneNumber":phoneNumber}
+	               		, success:function(data) {
+	               			
+	               			if(data.result == "fail") {
+	               				alert("예약자 정보가 없습니다.");
+	               			} else { 				
+		               			let message = 
+	               				"이름 : " + data.info.name
+		               			+ "\n날짜 : " + data.info.date.substring(0, 10);
+		               			+ "\n숙박 일 수 : " + data.info.day
+		               			+ "\n인원 : " + data.info.headcount
+		               			+ "\n상태 : " + data.info.state
+		               			alert(message);
+	               			}
+	               			
+	               		}
+	               		, error:function() {
+	               			alert("조회 에러");
+	               		}
+	                });
+	                       
 	        });
 	    });
 	</script>
-
-
 </body>
 </html>

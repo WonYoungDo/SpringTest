@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			`id` DESC
 	</select>
 	
-	<insert id="insertBooking" parameterType="map">
+	<insert id="insertBooking" parameterType="map"> 
 		INSERT INTO
 			`booking`
 		(
@@ -50,4 +50,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			`id` = #{id}
 	</delete>
+	
+	<select id="searchBooking" parameterType="string" resultType="com.tawny.spring.test.ajax.domain.Pension">
+		SELECT
+			`id`
+			, `name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`booking`
+		WHERE
+			`name` = #{name}
+			AND `phoneNumber` = #{phoneNumber}
+	</select>
+
 </mapper>

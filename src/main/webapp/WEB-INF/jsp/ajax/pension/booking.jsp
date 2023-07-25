@@ -59,18 +59,7 @@
 			
 			// 리셋 변수 생성
 //			var reset = false;
-			
-			// 날짜 입력란에 달력 생성
-			$("#dateInput").datepicker({
-				minDate:0
-				, currentText: '오늘'
-				, dateFormat: "yy-mm-dd"
-				, dayNamesMin:['월', '화', '수', '목', '금', '토', '일']
-				, onSelect:function (dateText) {
-                	$( "#endDate" ).datepicker('option', 'minDate', dateText);
-             	}
-			});
-			
+
 			// 유효성 검사 -> 예약 정보를 리스트 목록에 추가
 			$("#bookingBtn").on("click", function() {
 				let name = $("#nameInput").val();
@@ -96,12 +85,23 @@
 				} else {
 					$("#dayDiv").addClass("d-none");
 				} 
+				// 숙박 일 수가 숫자가 아닌 경우
+				// Not a Number
+				if(isNaN(day)) {
+					alert("숫자를 입력해주세요.");
+					return;
+				}
 				
 				if(headcount == "") {
 					$("#headcountDiv").removeClass("d-none");
 				} else {
 					$("#headcountDiv").addClass("d-none");
-				} 
+				}
+				// 인원 수가 숫자가 아닌 경우
+				if(isNaN(headcount)) {
+					alert("숫자를 입력해주세요.");
+					return;
+				}
 				
 				if(phoneNumber == "") {
 					$("#phoneNumberDiv").removeClass("d-none");
@@ -110,24 +110,38 @@
 				} 
 			
 				$.ajax({
-					type:"post"
+					type:"get"
 					, url:"/ajax/pension/add"
 					, data:{"day":day, "date":date, "phoneNumber":phoneNumber, "name":name, "headcount":headcount}
-	
-					, success:function(data){
+					, success:function(data) {
 						
 						if(data.result == "success") { // 성공
-							location.href = "/ajax/pension/bookingList"
+							location.href = "/ajax/pension/info";
+							alert("예약이 완료되었습니다.")
 						} else { // 실패
-							alert("추가 실패");
+							alert("예약 실패");
 						}
+						
 					}		
 					, error:function() {
-						alert("추가 에러");
+						alert("예약 에러");
 					}
 				});
 				
 			});
+			
+			
+			// 날짜 입력란에 달력 생성
+			$("#dateInput").datepicker({
+				minDate:0
+				, currentText: '오늘'
+				, dateFormat: "yy년 mm월 dd일"
+				, dayNamesMin:['월', '화', '수', '목', '금', '토', '일']
+				, onSelect:function (dateText) {
+                	$( "#endDate" ).datepicker('option', 'minDate', dateText);
+             	}
+			});
+			
 		});
 	</script>
 </body>

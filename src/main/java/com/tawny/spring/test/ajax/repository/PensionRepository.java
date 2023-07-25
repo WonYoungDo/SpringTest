@@ -25,4 +25,9 @@ public interface PensionRepository {
 
 	// 삭제 버튼 클릭 시 해당 행 삭제
 	public int deleteBooking(@Param("id") int id);
+	
+	
+	public Pension searchBooking(
+			@Param("name") String name
+			, @Param("phoneNumber") String phoneNumber);
 }

@@ -62,7 +62,7 @@
 						}
 
 		            }
-		            , error: function(jqXHR, textStatus, errorThrown) {
+		            , error: function() {
 		                // 서버의 응답이 실패한 경우, 에러 메시지를 표시합니다.
 		                alert("삭제 에러");
 		            }

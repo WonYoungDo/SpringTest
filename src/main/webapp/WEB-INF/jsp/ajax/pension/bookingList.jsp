@@ -32,12 +32,23 @@
 				<c:forEach var="booking" items="${bookingList }">
 					<tr>
 						<td>${booking.name }</td>
-						<td><fmt:formatDate value="${booking.date }" pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${booking.date }" pattern="yyyy년 MM월 dd일" /></td>
 						<td>${booking.day }박</td>
 						<td>${booking.headcount }명</td>
 						<td>${booking.phoneNumber }</td>
-						<td>${booking.state }</td>
-						<td><button type="button" class="btn btn-sm btn-danger">삭제</button></td>
+						
+						<td 
+							<c:choose>
+								<c:when test="${booking.state eq '대기중'}">
+									class="text-info"					
+								</c:when>
+								<c:when test="${booking.state eq '확정'}">
+									class="text-success"					
+								</c:when>
+							</c:choose>
+						>${booking.state }</td>
+						
+						<td><button type="button" class="btn btn-sm btn-danger delete-btn" data-booking-id="${booking.id }">삭제</button></td>
 					</tr>	
 				</c:forEach>	
 				</tbody>				
@@ -49,5 +60,37 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			
+			// 삭제 버튼을 클릭시 id를 기반으로 해당 행을 삭제
+			$(".delete-btn").on("click", function() {
+				
+				let id = $(this).data("booking-id");
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/pension/delete"
+					, data:{"id":id}
+					, success:function(data) {
+						
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패");
+						}
+						
+					}
+					, error:function() {
+						alert("삭제 에러");
+					}
+				});
+				
+				
+			});
+		});
+	</script>
+	
 </body>
 </html>
