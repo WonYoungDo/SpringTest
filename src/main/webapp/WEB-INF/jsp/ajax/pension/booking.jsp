@@ -16,30 +16,35 @@
 		<section class="d-flex justify-content-center">
 			<div class="col-6  mt-3">
 				<div class="text-center">
-					<h2>예약하기</h2>
+					<h2 class="font-weight-bold">예약하기</h2>
 				</div>
 				<div>
-					<label>이름</label> 
-					<input class="form-control mb-2">
+					<label class="font-weight-bold">이름</label>
+					<div class="d-none text-secondary" id="nameDiv">이름을 입력해주세요!</div>
+					<input class="form-control mb-2" id="nameInput">
 				</div>
 				<div>
-					<label>예약날짜</label> 
-					<input class="form-control mb-2">
+					<label class="font-weight-bold">예약날짜</label> 
+					<div class="d-none text-secondary" id="dateDiv">예약날짜를 입력해주세요!</div> 
+					<input class="form-control mb-2" id="dateInput">
 				</div>
 				<div>
-					<label>숙박일수</label> 
-					<input class="form-control mb-2">
+					<label class="font-weight-bold">숙박일수</label> 
+					<div class="d-none text-secondary" id="dayDiv">숙박일수를 입력해주세요!</div> 
+					<input class="form-control mb-2" id="dayInput">
 				</div>
 				<div>
-					<label>인원</label> 
-					<input class="form-control mb-2">
+					<label class="font-weight-bold">인원</label> 
+					<div class="d-none text-secondary" id="headcountDiv">숙박인원을 입력해주세요!</div>
+					<input class="form-control mb-2" id="headcountInput">
 				</div>
 				<div>
-					<label>전화번호</label> 
-					<input class="form-control mb-3">
+					<label class="font-weight-bold">전화번호</label> 
+					<div class="d-none text-secondary" id="phoneNumberDiv">전화번호를 입력해주세요!</div>
+					<input class="form-control mb-3" id="phoneNumberInput">
 				</div>
 				<div>
-					<button type="button" class="form-control btn-warning">예약</button>
+					<button type="button" class="form-control btn-warning font-weight-bold" id="bookingBtn">예약</button>
 				</div>
 			</div>
 		</section>
@@ -49,5 +54,81 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script>
+		$(document).ready(function() {
+			
+			// 리셋 변수 생성
+//			var reset = false;
+			
+			// 날짜 입력란에 달력 생성
+			$("#dateInput").datepicker({
+				minDate:0
+				, currentText: '오늘'
+				, dateFormat: "yy-mm-dd"
+				, dayNamesMin:['월', '화', '수', '목', '금', '토', '일']
+				, onSelect:function (dateText) {
+                	$( "#endDate" ).datepicker('option', 'minDate', dateText);
+             	}
+			});
+			
+			// 유효성 검사 -> 예약 정보를 리스트 목록에 추가
+			$("#bookingBtn").on("click", function() {
+				let name = $("#nameInput").val();
+				let date = $("#dateInput").val();
+				let day = $("#dayInput").val();
+				let phoneNumber = $("#phoneNumberInput").val();
+				let headcount = $("#headcountInput").val();
+				
+				if(name == "") {
+					$("#nameDiv").removeClass("d-none");
+				} else {
+					$("#nameDiv").addClass("d-none");
+				} 
+				
+				if(date == "") {
+					$("#dateDiv").removeClass("d-none");
+				} else {
+					$("#dateDiv").addClass("d-none");
+				} 
+				
+				if(day == "") {
+					$("#dayDiv").removeClass("d-none");
+				} else {
+					$("#dayDiv").addClass("d-none");
+				} 
+				
+				if(headcount == "") {
+					$("#headcountDiv").removeClass("d-none");
+				} else {
+					$("#headcountDiv").addClass("d-none");
+				} 
+				
+				if(phoneNumber == "") {
+					$("#phoneNumberDiv").removeClass("d-none");
+				} else {
+					$("#phoneNumberDiv").addClass("d-none");
+				} 
+			
+				$.ajax({
+					type:"post"
+					, url:"/ajax/pension/add"
+					, data:{"day":day, "date":date, "phoneNumber":phoneNumber, "name":name, "headcount":headcount}
+	
+					, success:function(data){
+						
+						if(data.result == "success") { // 성공
+							location.href = "/ajax/pension/bookingList"
+						} else { // 실패
+							alert("추가 실패");
+						}
+					}		
+					, error:function() {
+						alert("추가 에러");
+					}
+				});
+				
+			});
+		});
+	</script>
 </body>
 </html>

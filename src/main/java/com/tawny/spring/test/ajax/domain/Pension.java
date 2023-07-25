@@ -10,7 +10,7 @@ public class Pension {
 	private int headcount;
 	private int day;
 	
-	@DateTimeFormat(pattern="yyyy년 MM월 dd일")
+	@DateTimeFormat(pattern="yyyy-MM월-dd일")
 	private Date date;
 	private String phoneNumber;
 	private String state;

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tawny.spring.test.ajax.repository.PensionRepository">
-	<select id="selectbooking" parameterType="map" resultType="com.tawny.spring.test.ajax.domain.Pension">
+	<select id="selectBooking" parameterType="map" resultType="com.tawny.spring.test.ajax.domain.Pension">
 		SELECT
 			`id`
 			, `name`
@@ -21,4 +21,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY
 			`id` DESC
 	</select>
+	
+	<insert id="insertBooking" parameterType="map">
+		INSERT INTO
+			`booking`
+		(
+			`name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+		)
+		VALUE
+		(
+			#{name}
+			, #{headcount}
+			, #{day}
+			, #{date}
+			, #{phoneNumber}
+			, #{state}
+		)
+	</insert>
+	
+	<delete id="deleteBooking" parameterType="int">
+		DELETE FROM
+			`booking`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>

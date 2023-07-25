@@ -32,7 +32,7 @@
 				<c:forEach var="booking" items="${bookingList }">
 					<tr>
 						<td>${booking.name }</td>
-						<td><fmt:formatDate value="${booking.date }" pattern="yyyy년 M월 dd일" /></td>
+						<td><fmt:formatDate value="${booking.date }" pattern="yyyy-MM-dd" /></td>
 						<td>${booking.day }박</td>
 						<td>${booking.headcount }명</td>
 						<td>${booking.phoneNumber }</td>
