@@ -1,6 +1,7 @@
 package com.tawny.spring.test.jpa.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class CompanyService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	
+//	@Autowired
+//	private RecruitRepository recruitRepository;
 	
 	
 	// insert
@@ -61,6 +65,27 @@ public class CompanyService {
 		optionalCompany.ifPresent(company -> companyRepository.delete(company));
 	}
 
-
+	
+	// select id로 조회
+	
+	
+	// parameter 조건 조회
+	
+	
+	// 복합 조건 조회 1
+	
+	
+	// 복합 조건 조회 2
+	
+	
+	// 정렬 제한 조건 
+//	public List<Recruit> findTop3ByTypeOrderBySalaryDesc {
+//		return recruitRepository.findTop3ByTypeOrderBySalaryDesc("계약직");
+//	}
+	
+	// 범위 조회
+	
+	
+	// native query 
 
 }

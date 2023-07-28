@@ -55,4 +55,28 @@ public class CompanyController {
 		return "수행완료";
 	}
 	
+	
+	// select id로 조회
+	
+	
+	// parameter 조건 조회
+	
+	
+	// 복합 조건 조회 1
+	
+	
+	// 복합 조건 조회 2
+	
+	
+	// 정렬 제한 조건 
+//	@GetMapping("/5")
+//	public List<Recruit> recruitBySalary() {
+//		
+//	}
+	
+	// 범위 조회
+	
+	
+	// native query 
+	
 }
