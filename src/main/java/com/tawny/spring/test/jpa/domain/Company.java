@@ -1,4 +1,4 @@
-package com.tawny.spring.test.jps.domain;
+package com.tawny.spring.test.jpa.domain;
 
 import java.time.ZonedDateTime;
 

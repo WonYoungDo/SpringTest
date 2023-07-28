@@ -1,4 +1,4 @@
-package com.tawny.spring.test.jps;
+package com.tawny.spring.test.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tawny.spring.test.jps.domain.Company;
-import com.tawny.spring.test.jps.service.CompanyService;
+import com.tawny.spring.test.jpa.domain.Company;
+import com.tawny.spring.test.jpa.service.CompanyService;
 
 @RequestMapping("/lombok")
 @Controller
@@ -19,6 +19,8 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
+	
+	// insert
 	@ResponseBody
 	@GetMapping("/add")
 	public List<Company> createCompany() {
@@ -33,4 +35,24 @@ public class CompanyController {
 		
 		return companyList;	
 	}
+	
+	
+	// update
+	@ResponseBody
+	@GetMapping("/update")
+	public Company updateCompany() {
+		Company company = companyService.updateCompany(8, "중소기업", 34);
+		
+		return company;
+	}
+	
+	
+	// delete
+	@ResponseBody
+	@GetMapping("/delete")
+	public String deleteCompany() {
+		companyService.deleteCompany(10);
+		return "수행완료";
+	}
+	
 }
